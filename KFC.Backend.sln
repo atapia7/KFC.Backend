@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.Presenters", "KFC.Prese
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.Gateways.SQLite", "KFC.Gateways.SQLite\KFC.Gateways.SQLite.csproj", "{1E7A2BC7-CE4E-B58C-1A94-55CDD1B33BD4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{CD13FE20-02FF-44A6-8C30-FD25A95CFE62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,25 +1,25 @@
 using System.Net;
-
-using KFC.UseCases.Interface;
+using KFC.Entities.Utility;
 using KFC.UseCases.DTOs;
 using KFC.UseCases.DTOs.Input;
 using KFC.UseCases.InputPort;
-using KFC.Entities.Utility;
-using KFC.Entities.Enums;
-
+using KFC.Entities;
+using KFC.UseCases.Interface;
 
 namespace KFC.UseCases.Validator;
 
-public class CreatePriceChannelValidator: IInputPortValidator<CreatePriceChannelDto>
+public class CreatePriceChannelValidator : IInputPortValidator<CreatePriceChannelDto>
 {
-	private readonly IAccountRepository _accountRepository;
-	private readonly IPriceChannelRepository _repository;
+    private readonly IPriceChannelRepository _repository;
+    private readonly IAccountRepository _accountRepository;
 
-	public CreatePriceChannelValidator(IPriceChannelRepository repository, IAccountRepository accountRepository)
-	{
-		_repository = repository;
+    public CreatePriceChannelValidator(
+        IPriceChannelRepository repository,
+        IAccountRepository accountRepository)
+    {
+        _repository = repository;
         _accountRepository = accountRepository;
-	}
+    }
 
     public IEnumerable<MessageDto?> Messages { get; set; }
     public HttpStatusCode HttpStatusCode { get; set; }
@@ -32,9 +32,10 @@ public class CreatePriceChannelValidator: IInputPortValidator<CreatePriceChannel
             if (account is null)
             {
                 HttpStatusCode = HttpStatusCode.Forbidden;
-                Messages = new List<MessageDto> { new MessageDto("Sesión de usuario no encontrado") };
+                Messages = new List<MessageDto> { new MessageDto("Sesión de usuario no encontrada") };
                 return false;
             }
+
             if (!account.CanCrud)
             {
                 HttpStatusCode = HttpStatusCode.Unauthorized;
@@ -42,27 +43,34 @@ public class CreatePriceChannelValidator: IInputPortValidator<CreatePriceChannel
                 return false;
             }
 
-
-            //if (string.IsNullOrEmpty(inputDto.Name))
-            //{
-            //    HttpStatusCode = HttpStatusCode.BadRequest;
-            //    Messages = new List<MessageDto> { new MessageDto("el nombre del accessorio no puede ser null/vacio") };
-            //    return false;
-            //}
-            
-
             var messages = new List<MessageDto>();
 
+            var existsActive = await _repository.ExistsActiveAsync(inputDto.ProductId,inputDto.ChannelId);
+            if (existsActive)
+            {
+                messages.Add(new MessageDto(
+                    $"Ya existe un precio activo para el producto {inputDto.ProductId} en el canal {inputDto.ChannelId}"
+                ));
+            }
+
+            if (inputDto.Amount <= 0)
+            {
+                messages.Add(new MessageDto("El monto debe ser mayor que cero"));
+            }
+
             Messages = messages;
-            HttpStatusCode = messages.Count == 0 ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
-            return messages.Count == 0;
+            HttpStatusCode = messages.Any() ? HttpStatusCode.BadRequest : HttpStatusCode.OK;
+
+            return !messages.Any();
         }
         catch (Exception ex)
         {
             HttpStatusCode = HttpStatusCode.InternalServerError;
-            Messages = new List<MessageDto> { new MessageDto(String.Format("Ocurrio un error en el momento de crear la cuenta: {0}", ex.Message)) };
+            Messages = new List<MessageDto>
+            {
+                new MessageDto($"Ocurrió un error al validar el precio: {ex.Message}")
+            };
             return false;
         }
     }
-
 }

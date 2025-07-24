@@ -71,6 +71,15 @@ public class PriceChannelRepository : IPriceChannelRepository
         }
     }
 
-  
+    public async Task<bool> ExistsActiveAsync(int productId, int channelId)
+    {
+        return await _context.PriceChannel
+            .AsNoTracking()
+            .AnyAsync(pc =>
+                pc.ProductId == productId &&
+                pc.ChannelId == channelId &&
+                pc.IsActive
+            );
+    }
 }
 

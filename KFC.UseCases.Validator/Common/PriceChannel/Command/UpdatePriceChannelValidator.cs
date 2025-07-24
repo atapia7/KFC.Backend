@@ -50,10 +50,10 @@ public class UpdatePriceChannelValidator: IInputPortValidator<UpdatePriceChannel
             var messages = new List<MessageDto>();
 
             var channel = await _repository.GetPriceChannelByCodeAsync(inputDto.getCode());
-            if (channel is not null)
+            if (channel is  null)
             {
                 HttpStatusCode = HttpStatusCode.BadRequest;
-                Messages = new List<MessageDto> { new MessageDto("el Channel no existe") };
+                Messages = new List<MessageDto> { new MessageDto("el PriceChannel no existe") };
                 return false;
             }
             return true;

@@ -7,8 +7,9 @@ public interface IPriceChannelRepository
 {
 	Task CreateAsync(PriceChannel PriceChannel);
 	Task Update(PriceChannel PriceChannel);
+	Task<bool> ExistsActiveAsync(int productId, int ChannelId);
 
-	Task<PriceChannel?> GetPriceChannelByCodeAsync(int code);
+    Task<PriceChannel?> GetPriceChannelByCodeAsync(int code);
 	
 	Task<QueryResult<IEnumerable<PriceChannel>>> GetPriceChannelAllAsync(int page = 1, int pageSize = 10, QueryFilter<PriceChannel>? filter = null);
 

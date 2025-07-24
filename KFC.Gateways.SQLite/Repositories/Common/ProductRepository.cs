@@ -2,6 +2,7 @@
 using KFC.UseCases.Interface;
 using KFC.UseCases.Query;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace KFC.Gateways.SQLite;
 

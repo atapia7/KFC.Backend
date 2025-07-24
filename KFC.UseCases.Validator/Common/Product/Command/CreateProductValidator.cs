@@ -42,10 +42,16 @@ public class CreateProductValidator: IInputPortValidator<CreateProductDto>
                 return false;
             }
 
-            if (inputDto.Amount<0)
+            if (inputDto.Name is null or "")
             {
                 HttpStatusCode = HttpStatusCode.BadRequest;
-                Messages = new List<MessageDto> { new MessageDto("Amount no valido") };
+                Messages = new List<MessageDto> { new MessageDto("Name no valido") };
+                return false;
+            }
+            if (inputDto.Description is null or "")
+            {
+                HttpStatusCode = HttpStatusCode.BadRequest;
+                Messages = new List<MessageDto> { new MessageDto("Descripçion no valido") };
                 return false;
             }
 
