@@ -11,6 +11,7 @@ using KFC.UseCases.DTOs.Output;
 using KFC.UseCases.InputPort;
 using KFC.UseCases.OutputPort;
 using KFC.UseCases.Utility;
+using Microsoft.Extensions.Logging;
 
 namespace KFC.UseCases.Interactor;
 
@@ -20,22 +21,26 @@ public class LoginInteractor : ILoginInputPort
     private readonly IAccountRepository _accountRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IInputPortValidator<LoginDto> _validator;
+    private readonly ILogger<LoginInteractor> _logger;
 
     public LoginInteractor(
 		IUnitOfWork unitOfWork,
         IAccountRepository accountRepository,
         ILoginOutputPort outputPort,
-        IInputPortValidator<LoginDto> validator
+        IInputPortValidator<LoginDto> validator,
+        ILogger<LoginInteractor> logger
     )
 	{
 		_unitOfWork = unitOfWork;
         _accountRepository = accountRepository;
         _outputPort = outputPort;
         _validator = validator;
+        _logger = logger;
     }
 	
 	public async Task Handle(LoginDto entityDto)
 	{
+        _logger.LogInformation("Intento de login para el usuario: {UserName}", entityDto.UserName);
 
         bool IsValid = await _validator.IsValid(entityDto);
         if (!IsValid)

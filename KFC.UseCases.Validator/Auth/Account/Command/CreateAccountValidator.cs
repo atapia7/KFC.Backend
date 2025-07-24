@@ -43,25 +43,6 @@ public class CreateAccountValidator: IInputPortValidator<CreateAccountDto>
                 return false;
             }
 
-            //AccountTypeEnum? accounType = AccountTypeUtility.ConverTo(inputDto.Rol);
-
-            //if (accounType is null)
-            //{
-            //    HttpStatusCode = HttpStatusCode.BadRequest;
-            //    Messages = new List<MessageDto> { new MessageDto("Rol no existe") };
-            //    return false;
-            //}
-
-            //if (account.AccountType == AccountTypeEnum.Supervisor)
-            //{
-            //    if(accounType != AccountTypeEnum.Seller)
-            //    {
-            //        HttpStatusCode = HttpStatusCode.BadRequest;
-            //        Messages = new List<MessageDto> { new MessageDto("El usuario no puede crear este tipo de usuario") };
-            //        return false;
-            //    }
-            //}
-
             var messages = new List<MessageDto>();
 
             if (string.IsNullOrEmpty(inputDto.UserName))

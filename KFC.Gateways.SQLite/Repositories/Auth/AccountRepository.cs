@@ -3,20 +3,24 @@
 using KFC.Entities;
 using KFC.UseCases.Interface;
 using KFC.UseCases.Query;
+using Microsoft.Extensions.Logging;
 
 namespace KFC.Gateways.SQLite;
 
 public class AccountRepository : IAccountRepository
 {
-    private ApplicationContext _context;
+    private readonly ApplicationContext _context;
+    private readonly ILogger<AccountRepository> _logger;
 
-    public AccountRepository(ApplicationContext context)
+    public AccountRepository(ApplicationContext context, ILogger<AccountRepository> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     public async Task CreateAsync(Account account)
     {
+        _logger.LogInformation("Creando una nueva cuenta para el usuario: {UserName}", account.UserName);
         await _context.AddAsync(account);
     }
 

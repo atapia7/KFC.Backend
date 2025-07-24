@@ -9,12 +9,12 @@ public static class PriceChannelDependencyContainer
 {
     public static IServiceCollection AddPriceChannelValidators(this IServiceCollection services)
     {
-        services.AddTransient<IInputPortValidator<CreateChannelDto>, CreateChannelValidator>();
-        services.AddTransient<IInputPortValidator<DeleteChannelDto>, DeleteChannelValidator>();
-        services.AddTransient<IInputPortValidator<UpdateChannelDto>, UpdateChannelValidator>();
+        services.AddTransient<IInputPortValidator<CreatePriceChannelDto>, CreatePriceChannelValidator>();
+        services.AddTransient<IInputPortValidator<DeletePriceChannelDto>, DeletePriceChannelValidator>();
+        services.AddTransient<IInputPortValidator<UpdatePriceChannelDto>, UpdatePriceChannelValidator>();
 
-        services.AddTransient<IInputPortValidator<GetChannelAllDto>, GetChannelAllValidator>();
-        services.AddTransient<IInputPortValidator<GetChannelByCodeDto>, GetChannelByCodeValidator>();
+        services.AddTransient<IInputPortValidator<GetPriceChannelAllDto>, GetPriceChannelAllValidator>();
+        services.AddTransient<IInputPortValidator<GetPriceChannelByCodeDto>, GetPriceChannelByCodeValidator>();
 
         return services;
     }

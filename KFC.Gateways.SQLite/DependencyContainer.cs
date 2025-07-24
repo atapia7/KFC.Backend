@@ -20,6 +20,7 @@ public static class DependencyContainer
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+        // No necesitas registrar ILogger manualmente, el framework lo hace automáticamente
         return services;
 
 	}

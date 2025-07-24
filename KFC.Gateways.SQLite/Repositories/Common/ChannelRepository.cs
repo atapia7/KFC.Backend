@@ -2,20 +2,24 @@
 using KFC.UseCases.Interface;
 using KFC.UseCases.Query;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace KFC.Gateways.SQLite;
 
 public class ChannelRepository : IChannelRepository
 {
-    private ApplicationContext _context;
+    private readonly ApplicationContext _context;
+    private readonly ILogger<ChannelRepository> _logger;
 
-    public ChannelRepository(ApplicationContext context)
+    public ChannelRepository(ApplicationContext context, ILogger<ChannelRepository> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     public async Task CreateAsync(Channel Channel)
     {
+        _logger.LogInformation("Creando un nuevo canal: {Name}", Channel.Name);
         await _context.AddAsync(Channel);
     }
 

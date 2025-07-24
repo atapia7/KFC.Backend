@@ -7,15 +7,18 @@ namespace KFC.Gateways.SQLite;
 
 public class ProductRepository : IProductRepository
 {
-    private ApplicationContext _context;
+    private readonly ApplicationContext _context;
+    private readonly ILogger<ProductRepository> _logger;
 
-    public ProductRepository(ApplicationContext context)
+    public ProductRepository(ApplicationContext context, ILogger<ProductRepository> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     public async Task CreateAsync(Product Product)
     {
+        _logger.LogInformation("Creando un nuevo producto: {Name}", Product.Name);
         await _context.AddAsync(Product);
     }
 

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System.IO;
 
 
@@ -12,15 +13,21 @@ public class ContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
 	{
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
 
-        var basePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "KFC.WebApi");
+        var root = Path.GetFullPath(
+            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..")
+        );
+        // Ahora root apunta a la carpeta de la solución
+        var webApiPath = Path.Combine(root, "KFC.WebApi");
 
         var configuration = new ConfigurationBuilder()
-            .SetBasePath(basePath)
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true) // Archivo de configuración principal
+            .SetBasePath(webApiPath)
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
 
-        optionsBuilder.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+        var conn = configuration.GetConnectionString("DefaultConnection");
+        Console.WriteLine($"[DesignTime] Usando cadena: {conn}");
 
+        optionsBuilder.UseSqlite(conn);
 
         return new ApplicationContext(optionsBuilder.Options);
     }

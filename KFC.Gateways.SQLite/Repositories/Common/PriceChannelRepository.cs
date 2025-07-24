@@ -2,20 +2,24 @@
 using KFC.UseCases.Interface;
 using KFC.UseCases.Query;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace KFC.Gateways.SQLite;
 
 public class PriceChannelRepository : IPriceChannelRepository
 {
-    private ApplicationContext _context;
+    private readonly ApplicationContext _context;
+    private readonly ILogger<PriceChannelRepository> _logger;
 
-    public PriceChannelRepository(ApplicationContext context)
+    public PriceChannelRepository(ApplicationContext context, ILogger<PriceChannelRepository> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     public async Task CreateAsync(PriceChannel PriceChannel)
     {
+        _logger.LogInformation("Creando un nuevo PriceChannel: {Id}", PriceChannel.PriceChannelId);
         await _context.AddAsync(PriceChannel);
     }
 

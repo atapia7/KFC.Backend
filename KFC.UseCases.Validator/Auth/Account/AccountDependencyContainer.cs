@@ -21,7 +21,6 @@ public static class AccountDependencyContainer
         services.AddTransient<IInputPortValidator<GetAccountAllDto>, GetAccountAllValidator>();
         services.AddTransient<IInputPortValidator<GetAccountByIdDto>, GetAccountByIdValidator>();
         services.AddTransient<IInputPortValidator<GetAccountByUserNameDto>, GetAccountByUserNameValidator>();
-        services.AddTransient<IInputPortValidator<GetAccountByUserNameAndTokenDto>, GetAccountByUserNameAndTokenValidator>();
 
         services.AddTransient<IInputPortValidator<GetSessionDto>, GetAccountSessionValidator>();
        

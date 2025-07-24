@@ -17,7 +17,6 @@ public static class AccountDependencyContainer
         
 		services.AddTransient<IGetAccountByUserNameInputPort, GetAccountByUserNameInteractor>();
 		services.AddTransient<IGetAccountAllInputPort, GetAccountAllInteractor>();
-		services.AddTransient<IGetAccountByUserNameAndTokenInputPort, GetAccountByUserNameAndTokenAndTokenInteractor>();
 		
 		services.AddTransient<IGetAccountSessionInputPort, GetAccountSessionInteractor>();
 

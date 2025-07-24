@@ -17,6 +17,7 @@
     <ProjectReference Include="..\KFC.Presenters\KFC.Presenters.csproj" />
     <ProjectReference Include="..\KFC.UseCases.Interactor\KFC.UseCases.Interactor.csproj" />
     <ProjectReference Include="..\KFC.UseCases.Validator\KFC.UseCases.Validator.csproj" />
+    <ProjectReference Include="..\KFC.Controllers\KFC.Controllers.csproj" />
   </ItemGroup>
 
 </Project>
