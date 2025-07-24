@@ -1,0 +1,62 @@
+using System.Net;
+
+using KFC.UseCases.Interface;
+using KFC.UseCases.DTOs;
+using KFC.UseCases.DTOs.Input;
+using KFC.UseCases.InputPort;
+
+
+namespace KFC.UseCases.Validator;
+
+public class GetAccountByUserNameValidator : IInputPortValidator<GetAccountByUserNameDto>
+{
+	private readonly IAccountRepository _accountRepository;
+
+	public GetAccountByUserNameValidator(IAccountRepository accountRepository)
+	{
+        _accountRepository = accountRepository;
+	}
+
+    public IEnumerable<MessageDto?> Messages { get; set; }
+    public HttpStatusCode HttpStatusCode { get; set; }
+
+    public async Task<bool> IsValid(GetAccountByUserNameDto inputDto)
+    {
+        try
+        {
+            var account = await _accountRepository.GetAccountByUserNameAsync(inputDto.getNameClaim());
+            if (account is null)
+            {
+                HttpStatusCode = HttpStatusCode.Forbidden;
+                Messages = new List<MessageDto> { new MessageDto("Sesión de usuario no encontrado") };
+                return false;
+            }
+            if (!account.CanCreateAccounts)
+            {
+                HttpStatusCode = HttpStatusCode.Unauthorized;
+                Messages = new List<MessageDto> { new MessageDto("Usuario no tiene permisos para realizar esta acci�n") };
+                return false;
+            }
+
+            var accountExist = await _accountRepository.GetAccountByUserNameAsync(inputDto.UserName);
+            if (accountExist is null)
+            {
+                HttpStatusCode = HttpStatusCode.NotFound;
+                Messages = new List<MessageDto> { new MessageDto("Usuario no encontrado") };
+                return false;
+            }
+            
+            var messages = new List<MessageDto>();
+
+            Messages = messages;
+            HttpStatusCode = messages.Count == 0 ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
+            return messages.Count == 0;
+        }
+        catch (Exception ex)
+        {
+            HttpStatusCode = HttpStatusCode.InternalServerError;
+            Messages = new List<MessageDto> { new MessageDto(String.Format("Ocurrio un error en el momento de crear la cuenta: {0}", ex.Message)) };
+            return false;
+        }
+    }
+}

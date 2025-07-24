@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KFC.Entities\KFC.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

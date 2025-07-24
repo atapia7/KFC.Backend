@@ -1,5 +1,9 @@
 using System.Text;
+using KFC.Gateways.SQLite;
+using KFC.Presenters;
+using KFC.UseCases.Interactor;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -7,6 +11,37 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddAuthorization(); // ? Necesario para usar [Authorize]
+
+builder.Services.AddRepositoriesSQLite(builder.Configuration);
+builder.Services.AddInteractors();
+builder.Services.AddPresenters();
+
+// Configurar autenticación JWT
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    string secretKey = "aapKey";  // Cambiar por una clave segura en un entorno seguro
+    byte[] keyBytes = Encoding.UTF8.GetBytes(secretKey);
+
+    byte[] adjustedKeyBytes = new byte[32];
+    Array.Copy(keyBytes, adjustedKeyBytes, Math.Min(keyBytes.Length, adjustedKeyBytes.Length));
+
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "https://yourdomain.com",
+        ValidAudience = "https://api.yourdomain.com",
+        IssuerSigningKey = new SymmetricSecurityKey(adjustedKeyBytes)
+    };
+});
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "KFC API Develop", Version = "v1" });
@@ -53,7 +88,8 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", () =>
+
+app.MapGet("/weatherforecast", [Authorize] () =>
 {
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
@@ -65,7 +101,12 @@ app.MapGet("/weatherforecast", () =>
         .ToArray();
     return forecast;
 })
-.WithName("GetWeatherForecast");
+.WithName("GetWeatherForecast")
+.RequireAuthorization();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.Run();
 

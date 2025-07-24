@@ -12,4 +12,11 @@
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="7.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KFC.Gateways.PostgreSql\KFC.Gateways.SQLite.csproj" />
+    <ProjectReference Include="..\KFC.Presenters\KFC.Presenters.csproj" />
+    <ProjectReference Include="..\KFC.UseCases.Interactor\KFC.UseCases.Interactor.csproj" />
+    <ProjectReference Include="..\KFC.UseCases.Validator\KFC.UseCases.Validator.csproj" />
+  </ItemGroup>
+
 </Project>

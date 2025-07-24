@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KFC.UseCases.DTOs\KFC.UseCases.DTOs.csproj" />
+    <ProjectReference Include="..\KFC.UseCases.Interface\KFC.UseCases.Interface.csproj" />
+  </ItemGroup>
+
 </Project>

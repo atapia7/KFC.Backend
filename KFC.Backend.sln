@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.WebApi", "KFC.WebApi\KF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.Controllers", "KFC.Controllers\KFC.Controllers.csproj", "{247A8B3A-6120-4CAD-8037-42CD7BDA4F54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.Gateways.PostgreSql", "KFC.Gateways.PostgreSql\KFC.Gateways.PostgreSql.csproj", "{1D275E26-CC54-4175-891A-3F440A1966FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.Gateways.SQLite", "KFC.Gateways.PostgreSql\KFC.Gateways.SQLite.csproj", "{1D275E26-CC54-4175-891A-3F440A1966FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.Presenters", "KFC.Presenters\KFC.Presenters.csproj", "{F914B163-687F-4C7C-9C34-F3682935C188}"
 EndProject
