@@ -1,0 +1,6 @@
+@KFC.WebApi_HostAddress = http://localhost:5031
+
+GET {{KFC.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
