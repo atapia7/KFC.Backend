@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36310.24 d17.14
+VisualStudioVersion = 17.14.36310.24
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.- Enterprise Bussines Rules", "1.- Enterprise Bussines Rules", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -31,9 +31,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.WebApi", "KFC.WebApi\KF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.Controllers", "KFC.Controllers\KFC.Controllers.csproj", "{247A8B3A-6120-4CAD-8037-42CD7BDA4F54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.Gateways.SQLite", "KFC.Gateways.PostgreSql\KFC.Gateways.SQLite.csproj", "{1D275E26-CC54-4175-891A-3F440A1966FF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.Presenters", "KFC.Presenters\KFC.Presenters.csproj", "{F914B163-687F-4C7C-9C34-F3682935C188}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFC.Gateways.SQLite", "KFC.Gateways.SQLite\KFC.Gateways.SQLite.csproj", "{1E7A2BC7-CE4E-B58C-1A94-55CDD1B33BD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,14 +77,14 @@ Global
 		{247A8B3A-6120-4CAD-8037-42CD7BDA4F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{247A8B3A-6120-4CAD-8037-42CD7BDA4F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{247A8B3A-6120-4CAD-8037-42CD7BDA4F54}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D275E26-CC54-4175-891A-3F440A1966FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D275E26-CC54-4175-891A-3F440A1966FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D275E26-CC54-4175-891A-3F440A1966FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D275E26-CC54-4175-891A-3F440A1966FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F914B163-687F-4C7C-9C34-F3682935C188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F914B163-687F-4C7C-9C34-F3682935C188}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F914B163-687F-4C7C-9C34-F3682935C188}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F914B163-687F-4C7C-9C34-F3682935C188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E7A2BC7-CE4E-B58C-1A94-55CDD1B33BD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E7A2BC7-CE4E-B58C-1A94-55CDD1B33BD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E7A2BC7-CE4E-B58C-1A94-55CDD1B33BD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E7A2BC7-CE4E-B58C-1A94-55CDD1B33BD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,8 +100,8 @@ Global
 		{29767E94-712E-4D63-B77B-B410767836E1} = {C2F24F91-079E-4D62-9C99-A12843B0C326}
 		{BE847D20-0E27-4EB4-8553-BFE0845E0F87} = {5DFB70EB-E32A-48A5-AD4A-545B27AE5546}
 		{247A8B3A-6120-4CAD-8037-42CD7BDA4F54} = {4776DDEC-A02A-49E2-8088-984A04A254A0}
-		{1D275E26-CC54-4175-891A-3F440A1966FF} = {4776DDEC-A02A-49E2-8088-984A04A254A0}
 		{F914B163-687F-4C7C-9C34-F3682935C188} = {4776DDEC-A02A-49E2-8088-984A04A254A0}
+		{1E7A2BC7-CE4E-B58C-1A94-55CDD1B33BD4} = {4776DDEC-A02A-49E2-8088-984A04A254A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD4BE266-F498-4C6A-9A33-6C441BD1A91A}

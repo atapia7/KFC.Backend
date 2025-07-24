@@ -9,6 +9,9 @@ public static class DependencyContainer
 	{
 
 		services.AddAccountPresenters();
+		services.AddChannelPresenters();
+		services.AddPriceChannelPresenters();
+		services.AddProductPresenters();
 		
 		services.AddScoped<ILoginOutputPort, LoginPresenter>();
 		services.AddScoped<ISeedOutputPort, SeedPresenter>();

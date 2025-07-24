@@ -38,7 +38,7 @@ public class AccountRepository : IAccountRepository
         return true;
     }
     
-    public async Task<Account?> GetAccountByIdAsync(Guid accountId)
+    public async Task<Account?> GetAccountByIdAsync(int accountId)
     {
         var account = await _context
             .Account

@@ -9,7 +9,7 @@ public interface IAccountRepository
 	Task Update(Account account);
 
 	Task<bool> IsUserNameTakenAsync(string username, Account? excludeAccount = null);
-	Task<Account?> GetAccountByIdAsync(Guid accountId);
+	Task<Account?> GetAccountByIdAsync(int accountId);
 	Task<Account?> GetAccountByUserNameAsync(string userName);
 	
 	Task<QueryResult<IEnumerable<Account>>> GetAccountAllAsync(int page = 1, int pageSize = 10, QueryFilter<Account>? filter = null);
